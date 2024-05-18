@@ -1,3 +1,10 @@
 spring:
   application:
     name: hackerthon
+
+springdoc:
+  swagger-ui:
+    operations-sorter: method  # delete - get - patch - post - put 순으로 정렬
+    path: /api-docs
+  paths-to-match:
+    - /api/v1/** # swagger-ui에 표시할 api의 엔드포인트 패턴
