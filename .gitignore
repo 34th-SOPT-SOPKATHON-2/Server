@@ -29,3 +29,4 @@ replay_pid*
 *.pem
 src/main/resources/application.yml
 /src/main/resources
+/.gradle
