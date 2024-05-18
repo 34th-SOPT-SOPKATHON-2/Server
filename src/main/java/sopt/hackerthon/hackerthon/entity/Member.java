@@ -29,4 +29,8 @@ public class Member {
     public int increaseTotalZeroCount(){
         return this.totalZeroCount+=1;
     }
+
+    public void updateNickname(String nickname){
+        this.nickname = nickname;
+    }
 }

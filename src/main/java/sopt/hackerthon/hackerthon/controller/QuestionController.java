@@ -37,11 +37,11 @@ public class QuestionController {
   }
 
   @PostMapping("/question")
-  @Operation(summary = "질문 추가" , description = "chat Id와 질문을 통해 질문을 전달합니다.")
+  @Operation(summary = "선택한 질문 전달" , description = "chat Id와 질문을 통해 질문을 전달합니다.")
   @Parameter(name = "chatId", description = "채팅 ID, request param")
   @ApiResponse(
       responseCode = "201",
-      description = "질문 추가 성공",
+      description = "질문 전달 성공",
       content = @Content(
           schema = @Schema(implementation = QuestionMessageResponse.class)))
   public ResponseEntity<?> postQuestionList(

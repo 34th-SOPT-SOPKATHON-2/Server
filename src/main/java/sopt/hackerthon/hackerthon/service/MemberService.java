@@ -9,9 +9,6 @@ import sopt.hackerthon.hackerthon.entity.Member;
 import sopt.hackerthon.hackerthon.repository.MemberRepository;
 import sopt.hackerthon.hackerthon.service.dto.response.MemberResponseDto;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 @Service
 @RequiredArgsConstructor
 public class MemberService {
@@ -38,6 +35,13 @@ public class MemberService {
                 member.getTotalZeroCount(),
                 member.getImgUrl()
         );
+    }
+
+    @Transactional
+    public String updateNickName(Long memberId, String nickName){
+        Member member = findById(memberId);
+        member.updateNickname(nickName);
+        return member.getNickname();
     }
 
 }
