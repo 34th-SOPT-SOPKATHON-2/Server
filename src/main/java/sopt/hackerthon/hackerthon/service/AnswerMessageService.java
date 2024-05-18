@@ -41,4 +41,8 @@ public class AnswerMessageService {
         chat.getFriend().getId());
   }
 
+  public AnswerMessage findByChat(Chat chat){
+    return answerMessageJpaRepository.findByChat(chat);
+  }
+
 }

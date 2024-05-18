@@ -10,6 +10,7 @@ import sopt.hackerthon.hackerthon.common.status.ErrorStatus;
 import sopt.hackerthon.hackerthon.entity.Friend;
 import sopt.hackerthon.hackerthon.entity.Member;
 import sopt.hackerthon.hackerthon.repository.FriendRepository;
+import sopt.hackerthon.hackerthon.repository.MemberRepository;
 import sopt.hackerthon.hackerthon.service.dto.response.FriendResponseDto;
 
 @Service
@@ -17,6 +18,7 @@ import sopt.hackerthon.hackerthon.service.dto.response.FriendResponseDto;
 public class FriendService {
     private final FriendRepository friendRepository;
     private final MemberService memberService;
+    private final MemberRepository memberRepository;
 
     public Friend findById(Long id){
         return friendRepository.findById(id).orElseThrow(
@@ -29,7 +31,7 @@ public class FriendService {
         List<Friend> myFriendList = friendRepository.findAllByMember(member);
         return myFriendList.stream().map(
                 friend -> FriendResponseDto.of(friend.getId(), friend.getFriendZeroCount(),
-                        friend.getMember().getId(), friend.getImgUrl())
+                        friend.getMember().getId(),memberService.findById(friend.getId()).getNickname(), friend.getImgUrl())
         ).collect(Collectors.toList());
     }
 

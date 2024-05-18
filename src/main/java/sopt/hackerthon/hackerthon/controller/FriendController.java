@@ -29,7 +29,7 @@ public class FriendController {
 
     @GetMapping("/")
     @Operation(summary = "친구 목록 조회" , description = "member ID를 이용해 모든 친구를 조회합니다.")
-    @Parameter(name = "memberId", description = "친구 ID, request header")
+    @Parameter(name = "memberId", description = "멤버 ID, request header")
     @ApiResponse(
         responseCode = "200",
         description = "친구 목록 조회 성공",

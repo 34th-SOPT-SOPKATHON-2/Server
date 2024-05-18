@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import sopt.hackerthon.hackerthon.entity.qna.Question;
 
 @Entity
@@ -19,6 +21,7 @@ public class QuestionMessage {
     private Question question;
 
     @ManyToOne
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "chat_id")
     private Chat chat;
 
