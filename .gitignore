@@ -23,10 +23,10 @@
 hs_err_pid*
 replay_pid*
 
-
-/.gradle/
+./gradle
 /build/
 /.idea
 *.pem
 src/main/resources/application.yml
 /src/main/resources
+/.gradle
