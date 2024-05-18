@@ -9,8 +9,10 @@ import sopt.hackerthon.hackerthon.entity.AnswerMessage;
 import sopt.hackerthon.hackerthon.entity.Chat;
 import sopt.hackerthon.hackerthon.entity.Friend;
 import sopt.hackerthon.hackerthon.entity.Member;
+import sopt.hackerthon.hackerthon.entity.QuestionMessage;
 import sopt.hackerthon.hackerthon.repository.AnswerMessageJpaRepository;
 import sopt.hackerthon.hackerthon.repository.ChatRepository;
+import sopt.hackerthon.hackerthon.repository.QuestionMessageJpaRepository;
 import sopt.hackerthon.hackerthon.service.dto.response.ChatUserZeroCount;
 
 @Service
@@ -22,6 +24,8 @@ public class ChatService {
   private final FriendService friendService;
   private final QuestionMessageService questionMessageService;
   private final AnswerMessageJpaRepository answerMessageJpaRepository;
+  private final QuestionMessageJpaRepository questionMessageJpaRepository;
+
 //  private final ChatRepository chatRepository;
     //4 4 1 1 A_1
   public Chat findById(long chatId) {
@@ -41,6 +45,9 @@ public class ChatService {
     int memberZeroCount = memberService.increaseCount(member.getId());
     int friendZeroCount = memberService.increaseCount(member.getId());
     ChatUserZeroCount chatUserZeroCount = ChatUserZeroCount.of(answerMessage.getAnswer().getAnswer(),memberZeroCount,friendZeroCount);
+    QuestionMessage questionmessage = questionMessageJpaRepository.findByChat(chat);
+    questionMessageJpaRepository.delete(questionmessage);
+    answerMessageJpaRepository.delete(answerMessage);
     chatRepository.delete(chat);
     return chatUserZeroCount;
   }

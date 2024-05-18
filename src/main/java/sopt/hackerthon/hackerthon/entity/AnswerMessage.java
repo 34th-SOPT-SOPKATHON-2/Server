@@ -11,8 +11,6 @@ import jakarta.persistence.ManyToOne;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 import sopt.hackerthon.hackerthon.entity.qna.Answer;
 
 @Entity
@@ -36,7 +34,6 @@ public class AnswerMessage {
     private Friend friend;
 
     @ManyToOne
-    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "chat_id")
     private Chat chat;
 
