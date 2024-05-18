@@ -25,4 +25,8 @@ public class Member {
         this.nickname = nickname;
         this.imgUrl = imgUrl;
     }
+
+    public int increaseTotalZeroCount(){
+        return this.totalZeroCount+=1;
+    }
 }

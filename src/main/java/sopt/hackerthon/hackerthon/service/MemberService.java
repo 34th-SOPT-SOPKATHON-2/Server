@@ -2,6 +2,7 @@ package sopt.hackerthon.hackerthon.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import sopt.hackerthon.hackerthon.common.exception.NotFoundException;
 import sopt.hackerthon.hackerthon.common.status.ErrorStatus;
 import sopt.hackerthon.hackerthon.entity.Member;
@@ -20,6 +21,11 @@ public class MemberService {
         return memberRepository.findById(id).orElseThrow(
                 ()-> new NotFoundException(ErrorStatus.NOT_FOUND)
         );
+    }
+
+    @Transactional
+    public int increaseCount(Long memberId){
+        return findById(memberId).increaseTotalZeroCount();
     }
 
     public MemberResponseDto getMember(Long id){
