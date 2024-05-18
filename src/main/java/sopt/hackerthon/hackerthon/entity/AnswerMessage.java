@@ -1,25 +1,21 @@
-package sopt.hackerthon.hackerthon.common.domain;
+package sopt.hackerthon.hackerthon.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import sopt.hackerthon.hackerthon.common.domain.qna.Question;
+import sopt.hackerthon.hackerthon.entity.qna.Answer;
 
 @Entity
 @Getter
 @NoArgsConstructor
-public class QuestionMessage {
+public class AnswerMessage {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Enumerated(EnumType.STRING)
-    private Question question;
-
-    @ManyToOne
-    @JoinColumn(name = "chat_id")
-    private Chat chat;
+    private Answer answer;
 
     @ManyToOne
     @JoinColumn(name = "member_id")
@@ -29,8 +25,12 @@ public class QuestionMessage {
     @JoinColumn(name = "friend_id")
     private Friend friend;
 
-    public QuestionMessage(Chat chat, Question question) {
+    @ManyToOne
+    @JoinColumn(name = "chat_id")
+    private Chat chat;
+
+    public AnswerMessage(Chat chat, Answer answer) {
         this.chat = chat;
-        this.question = question;
+        this.answer = answer;
     }
 }

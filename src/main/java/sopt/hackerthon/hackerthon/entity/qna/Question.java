@@ -1,4 +1,4 @@
-package sopt.hackerthon.hackerthon.common.domain.qna;
+package sopt.hackerthon.hackerthon.entity.qna;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
