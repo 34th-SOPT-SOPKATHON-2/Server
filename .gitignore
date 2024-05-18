@@ -28,3 +28,5 @@ replay_pid*
 /build/
 /.idea
 *.pem
+src/main/resources/application.yml
+/src/main/resources
