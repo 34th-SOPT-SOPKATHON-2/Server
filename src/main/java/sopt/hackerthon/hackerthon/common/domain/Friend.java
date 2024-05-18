@@ -21,8 +21,11 @@ public class Friend {
     @JoinColumn(name = "member_id")
     private Member member;
 
-    public Friend(int friendZeroCount, Member member) {
+    private String imgUrl;
+
+    public Friend(int friendZeroCount, Member member, String imgUrl) {
         this.friendZeroCount = friendZeroCount;
         this.member = member;
+        this.imgUrl = imgUrl;
     }
 }

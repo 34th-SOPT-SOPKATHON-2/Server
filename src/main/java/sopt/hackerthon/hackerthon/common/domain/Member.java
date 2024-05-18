@@ -19,9 +19,12 @@ public class Member {
 
     private String nickname;
 
+    private String imgUrl;
+
     @Builder
-    public Member(int totalZeroCount, String nickname) {
+    public Member(int totalZeroCount, String nickname, String imgUrl) {
         this.totalZeroCount = totalZeroCount;
         this.nickname = nickname;
+        this.imgUrl = imgUrl;
     }
 }
