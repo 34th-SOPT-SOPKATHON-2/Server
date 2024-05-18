@@ -7,7 +7,7 @@ import sopt.hackerthon.hackerthon.entity.Chat;
 import sopt.hackerthon.hackerthon.entity.Friend;
 import sopt.hackerthon.hackerthon.entity.Member;
 import sopt.hackerthon.hackerthon.repository.ChatRepository;
-import sopt.hackerthon.hackerthon.service.dto.response.ChatResponse;
+import sopt.hackerthon.hackerthon.service.dto.response.InitChatResponse;
 
 @Service
 @RequiredArgsConstructor
@@ -18,13 +18,15 @@ public class ChatCreateService {
   private final FriendService friendService;
 
   @Transactional
-  public ChatResponse CreateChatRoom(long memberId, long friendId){
+  public InitChatResponse CreateChatRoom(long memberId, long friendId) {
 
     Member member = memberService.findById(memberId);
     Friend friend = friendService.findById(friendId);
-
+    Member receiver = memberService.findById(friend.getId());
     Chat chat = new Chat(member, friend);
     Chat saved = chatRepository.save(chat);
-    return ChatResponse.of(saved.getChatId(),member.getId(), friend.getId());
+    return InitChatResponse.of(saved.getChatId(), member.getId(), receiver.getId(),
+        receiver.getNickname(),
+        receiver.getImgUrl());
   }
 }

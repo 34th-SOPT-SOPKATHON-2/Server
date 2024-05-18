@@ -1,7 +1,5 @@
 package sopt.hackerthon.hackerthon.service;
 
-import java.util.List;
-import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -11,7 +9,6 @@ import sopt.hackerthon.hackerthon.entity.Chat;
 import sopt.hackerthon.hackerthon.entity.Friend;
 import sopt.hackerthon.hackerthon.entity.Member;
 import sopt.hackerthon.hackerthon.repository.ChatRepository;
-import sopt.hackerthon.hackerthon.service.dto.response.ChatResponse;
 import sopt.hackerthon.hackerthon.service.dto.response.ChatUserZeroCount;
 
 @Service
@@ -21,6 +18,8 @@ public class ChatService {
   private final ChatRepository chatRepository;
   private final MemberService memberService;
   private final FriendService friendService;
+  private final QuestionMessageService questionMessageService;
+//  private final ChatRepository chatRepository;
 
   public Chat findById(long chatId) {
     return chatRepository.findById(chatId).orElseThrow(
@@ -40,12 +39,5 @@ public class ChatService {
     return ChatUserZeroCount.of(memberZeroCount,friendZeroCount);
   }
 
-  public List<ChatResponse> getMyChatList(long memberId){
-    Member member = memberService.findById(memberId);
-    List<Chat> myChatList = chatRepository.findAllByMember(member);
-    return myChatList.stream().map(
-        chat -> ChatResponse.of(chat.getChatId(), chat.getMember().getId(), chat.getFriend().getId())
-    ).collect(Collectors.toList());
-  }
 
 }

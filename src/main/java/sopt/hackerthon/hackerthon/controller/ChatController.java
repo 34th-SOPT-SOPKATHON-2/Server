@@ -20,8 +20,8 @@ import sopt.hackerthon.hackerthon.common.dto.response.ControllerMessage;
 import sopt.hackerthon.hackerthon.common.status.SuccessStatus;
 import sopt.hackerthon.hackerthon.service.ChatCreateService;
 import sopt.hackerthon.hackerthon.service.ChatService;
-import sopt.hackerthon.hackerthon.service.dto.response.ChatResponse;
 import sopt.hackerthon.hackerthon.service.dto.response.ChatUserZeroCount;
+import sopt.hackerthon.hackerthon.service.dto.response.InitChatResponse;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -42,7 +42,7 @@ public class ChatController {
       responseCode = "201",
       description = "채팅방 생성 성공",
       content = @Content(
-          schema = @Schema(implementation = ChatResponse.class)))
+          schema = @Schema(implementation = InitChatResponse.class)))
   public ResponseEntity<?> postChat(
       @RequestHeader long memberId,
       @RequestParam long friendId

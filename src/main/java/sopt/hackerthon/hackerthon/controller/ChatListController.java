@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import sopt.hackerthon.hackerthon.common.dto.response.ControllerMessage;
 import sopt.hackerthon.hackerthon.common.status.SuccessStatus;
 import sopt.hackerthon.hackerthon.service.ChatService;
+import sopt.hackerthon.hackerthon.service.QuestionMessageService;
 import sopt.hackerthon.hackerthon.service.dto.response.ChatResponse;
 
 @RestController
@@ -25,6 +26,7 @@ import sopt.hackerthon.hackerthon.service.dto.response.ChatResponse;
 public class ChatListController {
 
     private final ChatService chatService;
+    private final QuestionMessageService questionMessageService;
 
     @GetMapping("/")
     @Operation(summary = "채팅방 목록 조회" , description = "member ID를 이용해 전체 채팅방을 조회합니다.")
@@ -36,6 +38,6 @@ public class ChatListController {
             schema = @Schema(implementation = ChatResponse.class)))
     public ResponseEntity<?> getMyChatList(@RequestHeader(name = "memberId") long memberId){
         return ResponseEntity.status(HttpStatus.OK)
-            .body(ControllerMessage.of(SuccessStatus.STATUS_OK,chatService.getMyChatList(memberId)));
+            .body(ControllerMessage.of(SuccessStatus.STATUS_OK,questionMessageService.getMyChatList(memberId)));
     }
 }
