@@ -14,6 +14,9 @@ import sopt.hackerthon.hackerthon.repository.QuestionMessageJpaRepository;
 import sopt.hackerthon.hackerthon.service.dto.response.QuestionListResponse;
 import sopt.hackerthon.hackerthon.service.dto.response.QuestionMessageResponse;
 
+import sopt.hackerthon.hackerthon.entity.qna.Question;
+import sopt.hackerthon.hackerthon.service.dto.response.QuestionResponse;
+
 @Service
 @RequiredArgsConstructor
 public class QuestionMessageService {

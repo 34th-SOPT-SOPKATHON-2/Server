@@ -10,6 +10,9 @@ import sopt.hackerthon.hackerthon.entity.Friend;
 import sopt.hackerthon.hackerthon.entity.Member;
 import sopt.hackerthon.hackerthon.repository.ChatRepository;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class ChatService {
@@ -34,5 +37,6 @@ public class ChatService {
     chatRepository.delete(chat);
     return memberZeroCount;
   }
+
 
 }
