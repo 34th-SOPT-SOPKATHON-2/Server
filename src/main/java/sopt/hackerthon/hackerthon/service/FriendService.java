@@ -1,17 +1,16 @@
 package sopt.hackerthon.hackerthon.service;
 
+import java.util.List;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import sopt.hackerthon.hackerthon.common.exception.NotFoundException;
 import sopt.hackerthon.hackerthon.common.status.ErrorStatus;
 import sopt.hackerthon.hackerthon.entity.Friend;
 import sopt.hackerthon.hackerthon.entity.Member;
 import sopt.hackerthon.hackerthon.repository.FriendRepository;
-import sopt.hackerthon.hackerthon.repository.MemberRepository;
 import sopt.hackerthon.hackerthon.service.dto.response.FriendResponseDto;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -32,6 +31,11 @@ public class FriendService {
                 friend -> FriendResponseDto.of(friend.getId(), friend.getFriendZeroCount(),
                         friend.getMember().getId(), friend.getImgUrl())
         ).collect(Collectors.toList());
+    }
+
+    @Transactional
+    public int increaseZeroCount(long friendId){
+        return findById(friendId).increaseTotalZeroCount();
     }
 
 }

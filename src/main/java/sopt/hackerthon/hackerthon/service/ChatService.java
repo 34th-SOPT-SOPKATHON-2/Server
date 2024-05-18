@@ -12,6 +12,7 @@ import sopt.hackerthon.hackerthon.entity.Friend;
 import sopt.hackerthon.hackerthon.entity.Member;
 import sopt.hackerthon.hackerthon.repository.ChatRepository;
 import sopt.hackerthon.hackerthon.service.dto.response.ChatResponse;
+import sopt.hackerthon.hackerthon.service.dto.response.ChatUserZeroCount;
 
 @Service
 @RequiredArgsConstructor
@@ -19,6 +20,7 @@ public class ChatService {
 
   private final ChatRepository chatRepository;
   private final MemberService memberService;
+  private final FriendService friendService;
 
   public Chat findById(long chatId) {
     return chatRepository.findById(chatId).orElseThrow(
@@ -27,15 +29,15 @@ public class ChatService {
   }
 
   @Transactional
-  public int deleteChat(long chatId){
+  public ChatUserZeroCount deleteChat(long chatId){
 
     Chat chat = findById(chatId);
     Member member = chat.getMember();
     Friend friend = chat.getFriend();
     int memberZeroCount = memberService.increaseCount(member.getId());
-//    int friendZeroCount = memberService.increaseCount(member.getId());
+    int friendZeroCount = memberService.increaseCount(member.getId());
     chatRepository.delete(chat);
-    return memberZeroCount;
+    return ChatUserZeroCount.of(memberZeroCount,friendZeroCount);
   }
 
   public List<ChatResponse> getMyChatList(long memberId){

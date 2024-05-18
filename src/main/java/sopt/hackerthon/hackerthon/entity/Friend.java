@@ -26,4 +26,7 @@ public class Friend {
         this.member = member;
         this.imgUrl = imgUrl;
     }
+    public int increaseTotalZeroCount(){
+        return this.friendZeroCount+=1;
+    }
 }

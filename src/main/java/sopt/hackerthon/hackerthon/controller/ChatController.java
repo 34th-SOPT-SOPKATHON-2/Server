@@ -21,6 +21,7 @@ import sopt.hackerthon.hackerthon.common.status.SuccessStatus;
 import sopt.hackerthon.hackerthon.service.ChatCreateService;
 import sopt.hackerthon.hackerthon.service.ChatService;
 import sopt.hackerthon.hackerthon.service.dto.response.ChatResponse;
+import sopt.hackerthon.hackerthon.service.dto.response.ChatUserZeroCount;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -51,8 +52,13 @@ public class ChatController {
   }
 
   @DeleteMapping("/chat")
-  @Operation(summary = "채팅방을 삭제합니다. ", description = "chatId를 이용해 채팅방을 삭제합니다.")
+  @Operation(summary = "채팅방을 삭제합니다. ", description = "chatId를 이용해 채팅방을 삭제합니다. member와 friend의 Zero Count를 1 증가시킵니다.")
   @Parameter(name = "chatId", description = "채팅방 ID, request param")
+  @ApiResponse(
+      responseCode = "200",
+      description = "채팅방 삭제 성공",
+      content = @Content(
+          schema = @Schema(implementation = ChatUserZeroCount.class)))
   public ResponseEntity<?> deleteChat(
       @RequestParam long chatId
   ){
