@@ -8,11 +8,14 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import sopt.hackerthon.hackerthon.common.dto.response.ControllerMessage;
+import sopt.hackerthon.hackerthon.common.status.SuccessStatus;
 import sopt.hackerthon.hackerthon.service.FriendService;
 import sopt.hackerthon.hackerthon.service.dto.response.FriendResponseDto;
 
@@ -34,6 +37,7 @@ public class FriendController {
             mediaType = "application/json",
             array = @ArraySchema(schema = @Schema(implementation = FriendResponseDto.class))))
     public ResponseEntity<?> getMyFriendList(@RequestHeader(name = "memberId") long memberId){
-        return ResponseEntity.ok(friendService.getMyFriendList(memberId));
+        return ResponseEntity.status(HttpStatus.OK)
+            .body(ControllerMessage.of(SuccessStatus.STATUS_OK,friendService.getMyFriendList(memberId)));
     }
 }

@@ -7,11 +7,14 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import sopt.hackerthon.hackerthon.common.dto.response.ControllerMessage;
+import sopt.hackerthon.hackerthon.common.status.SuccessStatus;
 import sopt.hackerthon.hackerthon.service.MemberService;
 import sopt.hackerthon.hackerthon.service.dto.response.MemberResponseDto;
 
@@ -31,8 +34,9 @@ public class MemberController {
         description = "멤버 조회 성공",
         content = @Content(
             schema = @Schema(implementation = MemberResponseDto.class)))
-    public ResponseEntity<MemberResponseDto> getMember(@PathVariable Long memberId){
+    public ResponseEntity<?> getMember(@PathVariable Long memberId){
         MemberResponseDto memberResponseDto = memberService.getMember(memberId);
-        return ResponseEntity.ok(memberResponseDto);
+        return ResponseEntity.status(HttpStatus.OK)
+            .body(ControllerMessage.of(SuccessStatus.STATUS_OK,memberResponseDto));
     }
 }
