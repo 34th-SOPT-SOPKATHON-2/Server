@@ -1,6 +1,8 @@
 package sopt.hackerthon.hackerthon.controller;
 
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,11 +20,13 @@ import sopt.hackerthon.hackerthon.service.AnswerMessageService;
 @RestController
 @RequestMapping("/api/v1")
 @RequiredArgsConstructor
+@Tag(name = "답변" , description = "답변 관련 기능을 담당합니다.")
 public class AnswerController {
 
   private final AnswerMessageService answerMessageService;
 
   @GetMapping("/answer/list")
+  @Operation(summary = "답변을 조회합니다. ", description = "상수로 저장된 답변 리스트를 반환합니다.")
   public ResponseEntity<?> getAnswerList() {
     return ResponseEntity.status(HttpStatus.OK)
         .body(
@@ -30,6 +34,7 @@ public class AnswerController {
   }
 
   @PostMapping("/answer")
+  @Operation(summary = "답변을 추가합니다. ", description = "답변을 추가합니다 ( Option ).")
   public ResponseEntity<?> postAnswerList(
       @RequestParam long chatId,
       @RequestBody Answer answer
