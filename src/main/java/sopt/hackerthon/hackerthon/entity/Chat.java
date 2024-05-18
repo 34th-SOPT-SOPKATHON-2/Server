@@ -1,6 +1,7 @@
 package sopt.hackerthon.hackerthon.entity;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -21,6 +22,7 @@ public class Chat {
     @JoinColumn(name = "friend_id")
     private Friend friend;
 
+    @Builder
     public Chat(Member member, Friend friend) {
         this.member = member;
         this.friend = friend;

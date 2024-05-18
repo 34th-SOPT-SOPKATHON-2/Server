@@ -1,6 +1,7 @@
 package sopt.hackerthon.hackerthon.entity;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import sopt.hackerthon.hackerthon.entity.qna.Question;
@@ -29,8 +30,11 @@ public class QuestionMessage {
     @JoinColumn(name = "friend_id")
     private Friend friend;
 
-    public QuestionMessage(Chat chat, Question question) {
+    @Builder
+    public QuestionMessage(Chat chat, Question question, Member member, Friend friend) {
         this.chat = chat;
         this.question = question;
+        this.member = member;
+        this.friend = friend;
     }
 }

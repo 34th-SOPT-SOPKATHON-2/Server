@@ -1,4 +1,8 @@
 package sopt.hackerthon.hackerthon.service.dto.response;
 
-public record ChatListResponseDto() {
+public record QuestionResponse(
+    String question,
+
+){
+
 }
