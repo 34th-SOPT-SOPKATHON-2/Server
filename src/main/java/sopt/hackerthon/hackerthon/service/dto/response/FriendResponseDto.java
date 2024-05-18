@@ -9,8 +9,7 @@ public record FriendResponseDto(
         Long member_id,
         String imgUrl
 ) {
-    public static FriendResponseDto of(Friend friend){
-        return new FriendResponseDto(friend.getId(), friend.getFriendZeroCount(),
-                friend.getMember().getId(), friend.getImgUrl());
+    public static FriendResponseDto of(Long id, int friendZeroCount, Long memberId, String imgUrl){
+        return new FriendResponseDto(id, friendZeroCount, memberId, imgUrl);
     }
 }
