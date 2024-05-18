@@ -29,8 +29,8 @@ import sopt.hackerthon.hackerthon.service.dto.response.InitChatResponse;
 @Tag(name = "채팅" , description = "채팅 관련 기능을 담당합니다.")
 public class ChatController {
 
-  private ChatService chatService;
-  private ChatCreateService chatCreateService;
+  private final ChatService chatService;
+  private final ChatCreateService chatCreateService;
 
   @PostMapping("/chat")
   @Operation(summary = "채팅방을 생성합니다. ", description = "member ID, friend Id를 이용해 채팅방을 생성합니다.")
