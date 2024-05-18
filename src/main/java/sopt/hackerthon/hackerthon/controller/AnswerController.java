@@ -2,6 +2,9 @@ package sopt.hackerthon.hackerthon.controller;
 
 
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -16,6 +19,8 @@ import sopt.hackerthon.hackerthon.common.dto.response.ControllerMessage;
 import sopt.hackerthon.hackerthon.common.status.SuccessStatus;
 import sopt.hackerthon.hackerthon.entity.qna.Answer;
 import sopt.hackerthon.hackerthon.service.AnswerMessageService;
+import sopt.hackerthon.hackerthon.service.dto.response.AnswerListResponse;
+import sopt.hackerthon.hackerthon.service.dto.response.AnswerMessageResponse;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -27,6 +32,11 @@ public class AnswerController {
 
   @GetMapping("/answer/list")
   @Operation(summary = "답변을 조회합니다. ", description = "상수로 저장된 답변 리스트를 반환합니다.")
+  @ApiResponse(
+      responseCode = "200",
+      description = "정상 조회",
+      content = @Content(
+          schema = @Schema(implementation = AnswerListResponse.class)))
   public ResponseEntity<?> getAnswerList() {
     return ResponseEntity.status(HttpStatus.OK)
         .body(
@@ -35,6 +45,11 @@ public class AnswerController {
 
   @PostMapping("/answer")
   @Operation(summary = "답변을 추가합니다. ", description = "답변을 추가합니다 ( Option ).")
+  @ApiResponse(
+      responseCode = "201",
+      description = "답변 정상 추가",
+      content = @Content(
+          schema = @Schema(implementation = AnswerMessageResponse.class)))
   public ResponseEntity<?> postAnswerList(
       @RequestParam long chatId,
       @RequestBody Answer answer

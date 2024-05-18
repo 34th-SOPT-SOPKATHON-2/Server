@@ -3,6 +3,9 @@ package sopt.hackerthon.hackerthon.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.Parameters;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -17,6 +20,7 @@ import sopt.hackerthon.hackerthon.common.dto.response.ControllerMessage;
 import sopt.hackerthon.hackerthon.common.status.SuccessStatus;
 import sopt.hackerthon.hackerthon.service.ChatCreateService;
 import sopt.hackerthon.hackerthon.service.ChatService;
+import sopt.hackerthon.hackerthon.service.dto.response.ChatResponse;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -33,6 +37,11 @@ public class ChatController {
       @Parameter(name = "memberId", description = "멤버의 ID, request header"),
       @Parameter(name = "friendId", description = "친구의 ID, request param"),
   })
+  @ApiResponse(
+      responseCode = "201",
+      description = "채팅방 생성 성공",
+      content = @Content(
+          schema = @Schema(implementation = ChatResponse.class)))
   public ResponseEntity<?> postChat(
       @RequestHeader long memberId,
       @RequestParam long friendId

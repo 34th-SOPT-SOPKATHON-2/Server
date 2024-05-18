@@ -2,6 +2,9 @@ package sopt.hackerthon.hackerthon.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -16,6 +19,7 @@ import sopt.hackerthon.hackerthon.common.dto.response.ControllerMessage;
 import sopt.hackerthon.hackerthon.common.status.SuccessStatus;
 import sopt.hackerthon.hackerthon.entity.qna.Question;
 import sopt.hackerthon.hackerthon.service.QuestionMessageService;
+import sopt.hackerthon.hackerthon.service.dto.response.QuestionMessageResponse;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -35,6 +39,11 @@ public class QuestionController {
   @PostMapping("/question")
   @Operation(summary = "질문 추가" , description = "chat Id와 질문을 통해 질문을 전달합니다.")
   @Parameter(name = "chatId", description = "채팅 ID, request param")
+  @ApiResponse(
+      responseCode = "201",
+      description = "질문 추가 성공",
+      content = @Content(
+          schema = @Schema(implementation = QuestionMessageResponse.class)))
   public ResponseEntity<?> postQuestionList(
       @RequestParam long chatId,
       @RequestBody Question question

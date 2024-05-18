@@ -2,9 +2,11 @@ package sopt.hackerthon.hackerthon.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,6 +26,11 @@ public class MemberController {
     @GetMapping("/{memberId}")
     @Operation(summary = "멤버 정보 조회" , description = "member ID를 이용해 멤버 정보를 조회합니다.")
     @Parameter(name = "memberId", description = "멤버 ID, path variable")
+    @ApiResponse(
+        responseCode = "200",
+        description = "멤버 조회 성공",
+        content = @Content(
+            schema = @Schema(implementation = MemberResponseDto.class)))
     public ResponseEntity<MemberResponseDto> getMember(@PathVariable Long memberId){
         MemberResponseDto memberResponseDto = memberService.getMember(memberId);
         return ResponseEntity.ok(memberResponseDto);
