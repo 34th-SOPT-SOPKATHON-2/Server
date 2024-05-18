@@ -14,5 +14,5 @@ public enum Answer {
   A_5("안녕하세요 답변5 입니다."),
   A_6("안녕하세요 답변6 입니다."),
   ;
-  private final String Question;
+  private final String answer;
 }
