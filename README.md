@@ -1,4 +1,4 @@
-# 1차 과제
+[역할 분담 33304f0d52644c0e80639ede3a4b1aa8.csv](https://github.com/34th-SOPT-SOPKATHON-2/Server/files/15365997/33304f0d52644c0e80639ede3a4b1aa8.csv)# 1차 과제
 
 # 1. 서비스 소개
 
@@ -214,6 +214,10 @@
         
         ### Fail : 400 BAD_REQUEST
         
+
+<img width="892" alt="스크린샷 2024-05-19 오전 1 07 45" src="https://github.com/34th-SOPT-SOPKATHON-2/Server/assets/43662405/1edb1e8d-ea6b-49f5-b39f-2a5430db783b">
+
+
 
 # 3. 코드 컨벤션
 
