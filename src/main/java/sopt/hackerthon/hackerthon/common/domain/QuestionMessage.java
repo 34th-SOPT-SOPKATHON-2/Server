@@ -3,6 +3,7 @@ package sopt.hackerthon.hackerthon.common.domain;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import sopt.hackerthon.hackerthon.common.domain.qna.Question;
 
 @Entity
 @Getter
@@ -13,14 +14,23 @@ public class QuestionMessage {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Enumerated(EnumType.STRING)
+    private Question question;
+
     @ManyToOne
     @JoinColumn(name = "chat_id")
     private Chat chat;
 
-    private String messageContent;
+    @ManyToOne
+    @JoinColumn(name = "member_id")
+    private Member member;
 
-    public QuestionMessage(Chat chat, String messageContent) {
+    @ManyToOne
+    @JoinColumn(name = "friend_id")
+    private Friend friend;
+
+    public QuestionMessage(Chat chat, Question question) {
         this.chat = chat;
-        this.messageContent = messageContent;
+        this.question = question;
     }
 }
